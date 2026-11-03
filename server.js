@@ -1,8 +1,9 @@
-const dotenv = require('dotenv')
-const mongoose = require('mongoose')
+import dotenv from 'dotenv'
+import mongoose from 'mongoose'
+import app from './app.js'
+
 dotenv.config({ path: './.env' })
 
-const app = require('./app')
 const PORT = process.env.PORT || 3000
 
 mongoose.connect(process.env.MDB_REMOTE_CONN_STR)

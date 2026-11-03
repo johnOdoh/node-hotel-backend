@@ -1,11 +1,12 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 const schema = mongoose.Schema
 
 const roomCategorySchema = new schema({
     name: {
         type: String,
         required: true,
-        unique: [true, 'Category name already exists']
+        unique: [true, 'Category name already exists'],
+        trim: true
     },
     images: {
         type: [],
@@ -24,7 +25,7 @@ const roomCategorySchema = new schema({
         required: true
     },
     capacity: {
-        type: Number,
+        type: schema.Types.Int32,
         required: true,
         default: 1
     },
@@ -34,4 +35,4 @@ const roomCategorySchema = new schema({
     }
 })
 
-module.exports = mongoose.model('RoomCategory', roomCategorySchema)
+export default mongoose.model('RoomCategory', roomCategorySchema)

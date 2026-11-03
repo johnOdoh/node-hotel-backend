@@ -1,6 +1,7 @@
-const router = require('express').Router()
+import express from 'express'
+const router = express.Router()
 
-const RoomCategoryController = require('../Controllers/RoomCategoryController')
+import RoomCategoryController from '../Controllers/RoomCategoryController.js'
 
 router.route('/:id')
     .get(RoomCategoryController.getCategory)
@@ -11,4 +12,4 @@ router.route('/')
     .get(RoomCategoryController.getCategories)
     .post(RoomCategoryController.createCategory)
 
-module.exports = router
+export default router

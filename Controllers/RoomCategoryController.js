@@ -1,6 +1,6 @@
-const roomCategoryModel = require('../Models/RoomCategory')
+import roomCategoryModel from '../Models/RoomCategory.js'
 
-exports.createCategory = async (req, res) => {
+const createCategory = async (req, res) => {
     try {
         const roomCategory = new roomCategoryModel(req.body)
         await roomCategory.save()
@@ -18,7 +18,7 @@ exports.createCategory = async (req, res) => {
     }
 }
 
-exports.getCategories = async (req, res) => {
+const getCategories = async (req, res) => {
     try {
         const roomCategories = await roomCategoryModel.find()
         res.status(200).json({
@@ -35,7 +35,7 @@ exports.getCategories = async (req, res) => {
     }
 }
 
-exports.getCategory = async (req, res) => {
+const getCategory = async (req, res) => {
     try {
         const roomCategory = await roomCategoryModel.findById(req.params.id)
         if (!roomCategory) {
@@ -58,9 +58,12 @@ exports.getCategory = async (req, res) => {
     }
 }
 
-exports.updateCategory = async (req, res) => {
+const updateCategory = async (req, res) => {
     try {
-        const roomCategory = await roomCategoryModel.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after' })
+        const roomCategory = await roomCategoryModel.findByIdAndUpdate(req.params.id, req.body, { 
+            returnDocument: 'after', 
+            runValidators: true 
+        })
         if (!roomCategory) {
             return res.status(404).json({
                 status: 'error',
@@ -81,7 +84,7 @@ exports.updateCategory = async (req, res) => {
     }
 }
 
-exports.deleteCategory = async (req, res) => {
+const deleteCategory = async (req, res) => {
     try {
         await roomCategoryModel.findByIdAndDelete(req.params.id)
         res.status(204).json({
@@ -96,3 +99,5 @@ exports.deleteCategory = async (req, res) => {
         })
     }
 }
+
+export default { createCategory, getCategories, getCategory, updateCategory, deleteCategory }

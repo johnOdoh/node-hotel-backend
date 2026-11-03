@@ -1,16 +1,18 @@
-const express = require('express')
-const morgan = require('morgan')
+import express from 'express'
+import morgan from 'morgan'
 const app = express()
 
-const roomCategoryRoute = require('./Routes/RoomCategory')
+import roomRoute from './Routes/Room.js'
+import roomCategoryRoute from './Routes/RoomCategory.js'
 
 app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/api/room-category', roomCategoryRoute)
+app.use('/api/room', roomRoute)
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Hotel Booking API')
 })
 
-module.exports = app
+export default app

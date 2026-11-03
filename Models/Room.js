@@ -1,21 +1,28 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+import { ROOM_STATUS } from '../utils/enums.js'
 const schema = mongoose.Schema
+// const { ROOM_STATUS } = require('../utils/enums')
 
 const roomSchema = new schema({
-    'number': {
-        type: Int32,
+    number: {
+        type: schema.Types.Int32,
         required: true,
         unique: true
     },
-    'status': {
+    status: {
         type: String,
-        required: true
+        required: true,
+        enum: {
+            values: Object.values(ROOM_STATUS),
+            message: '{VALUE} is not supported'
+        },
+        default: ROOM_STATUS.OPEN
     },
-    'category': {
+    category: {
         type: schema.Types.ObjectId,
         ref: 'RoomCategory',
         required: true
     }
 })
 
-module.exports = mongoose0.model('Room', roomSchema)
+export default mongoose.model('Room', roomSchema)

@@ -1,64 +1,68 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 const schema = mongoose.Schema
 
 const reservationSchema = new schema({
-    'room': {
+    room: {
         type: schema.Types.ObjectId,
         ref: 'Room',
         required: true
     },
-    'reference': {
+    reference: {
         type: String,
         required: true,
         unique: true
     },
-    'name': {
+    name: {
         type: String,
         required: true
     },
-    'email': {
+    email: {
         type: String,
         required: true
     },
-    'phone': {
+    phone: {
         type: String,
         required: true
     },
-    'checkIn': {
+    checkIn: {
         type: Date,
         required: true
     },
-    'checkOut': {
+    checkOut: {
         type: Date,
         required: true
     },
-    'number_of_guests': {
+    number_of_guests: {
         type: Int32,
         required: true
     },
-    'estimated_arrival_time': String,
-    'special_request': String,
-    'amount': {
+    estimated_arrival_time: String,
+    special_request: String,
+    amount: {
         type: Number,
         required: true
     },
-    'booking_type': {
+    booking_type: {
         type: String,
         required: true
     },
-    'status': {
+    status: {
         type: String,
         required: true
     },
-    'booked_by': {
+    booked_by: {
         type: schema.Types.ObjectId,
-        'ref': 'User',
+        ref: 'User',
         required: true
     },
-    'is_completed': {
+    is_completed: {
         type: Boolean,
         default: false
+    },
+    created_at: {
+        type: Date,
+        default: Date.now()
     }
 })
 
-module.exports = mongoose.model('Reservation', reservationSchema)
+export default mongoose.model('Reservation', reservationSchema)
